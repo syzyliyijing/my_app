@@ -15,15 +15,20 @@
 <script>
 export default {
   name: 'HomeSwiper',
-  data() {
+  data () {
     return {
-      swiperOption:{}
+      swiperOption:{
+          loop: true,
+          pagination: '.swiper-pagination',
+      }
     }
   } 
 }
 </script >
 
 <style lang='stylus' scoped>
+swiper >>> .swiper-pagination
+  background #ffffff
  .swiper-img
    width: 100%
 </style>
