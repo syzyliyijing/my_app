@@ -81,7 +81,7 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
-@import '~@/assets/styles/varibles.styl';
+@import '~@/assets/styles/varibles.styl'
   .icons >>> .swiper-container
     height 0
     padding-bottom 50%
@@ -96,8 +96,8 @@ export default {
       float left
       width 15%
       height 0
-      margin-left 4%
-      margin-right 4.5%
+      margin-left 5%
+      margin-right 5%
       padding-bottom 25%
       .icon-img
         position absolute
