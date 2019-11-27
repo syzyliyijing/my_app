@@ -95,6 +95,7 @@ export default {
     position relative
     padding .2rem
     padding-bottom -.1rem
+    text-align left 
     .title-left
       font-size .32rem
       line-height .44rem
