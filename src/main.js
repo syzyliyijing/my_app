@@ -11,6 +11,7 @@ import '@/assets/styles/iconfont.css'
 import 'swiper/dist/css/swiper.css'
 
 
+
 Vue.config.productionTip = false
 fastClick.attach(document.body)
 // 调用fastClick绑定到document.body上
