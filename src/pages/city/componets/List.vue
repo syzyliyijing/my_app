@@ -1,6 +1,6 @@
 <template>
-    <div class="list">
-
+    <div class="list" ref="wrapper">
+      <div>
          <!--当前城市 -->
         <div class="area">
             <div class="title border-topbottom">当前城市</div>
@@ -13,104 +13,64 @@
         
         <!--热门城市 -->
          <div class="area">
-            <div class="title border-topbottom">当前城市</div>
+            <div class="title border-topbottom">热门城市</div>
             <div class="button-list">
-                <div class="button-wrapper">
-                    <div class="button">北京</div>
-                </div>
-                <div class="button-wrapper">
-                    <div class="button">北京</div>
-                </div>
-                <div class="button-wrapper">
-                    <div class="button">北京</div>
-                </div>
-                <div class="button-wrapper">
-                    <div class="button">北京</div>
-                </div>
-                <div class="button-wrapper">
-                    <div class="button">北京</div>
-                </div>
+                <div class="button-wrapper"
+                     v-for="item of hot"
+                     :key="item.key">
+                    <div class="button">{{item.name}}</div>
+                </div>               
             </div>
-        </div>
+         </div>
 
          <!--链接城市 -->
-         <div class="area">
+         <div class="area"
+              v-for="(item,key) of cities"
+              :key="key">
             <div class="title border-topbottom">A</div>
             <div class="item-list">
-                <div class="item border-bottom">
-                    阿拉善
-                </div>
-                <div class="item border-bottom">
-                    阿拉善
-                </div>
-                <div class="item border-bottom">
-                    阿拉善
-                </div>
-                <div class="item border-bottom">
-                    阿拉善
-                </div>
-                <div class="item border-bottom">
-                    阿拉善
-                </div>                
-            </div>
-
-             <div class="title border-topbottom">B</div>
-            <div class="item-list">
-                <div class="item border-bottom">
-                    北京
-                </div>
-                <div class="item border-bottom">
-                    北京
-                </div>
-                <div class="item border-bottom">
-                    北京
-                </div>
-                <div class="item border-bottom">
-                    北京
-                </div>
-                <div class="item border-bottom">
-                    北京
-                </div>                
-            </div>
-
-             <div class="title border-topbottom">C</div>
-            <div class="item-list">
-                <div class="item border-bottom">
-                    长沙
-                </div>
-                <div class="item border-bottom">
-                    长沙
-                </div>
-                <div class="item border-bottom">
-                    长沙
-                </div>
-                <div class="item border-bottom">
-                    长沙
-                </div>
-                <div class="item border-bottom">
-                    长沙
-                </div>                
-            </div>
-        </div>
+                <div class="item border-bottom"
+                     v-for="innerItem of item"
+                     :key="innerItem.id">
+                    {{innerItem.name}}
+                </div>                               
+            </div>            
+         </div>
+      </div>
     </div>
 </template>
 
 <script>
+import Bscroll from "better-scroll"
 export default {
-    name: 'CityList'
-}
+    name: 'CityList',
+    props:{
+        hot: Array,
+        cities: Object
+    },
+    mounted (){
+        this.scroll=new Bscroll(this.$refs.wrapper)
+    }
+};
 </script>
 
 <style lang="stylus" scoped>
-  @import '~@/assets/styles/varibles.styl'
-  .border-topbottom
-    &:before
-      border-color: #ffffff
-    &:after
-      border-color: #cccccc
-  .border-bottom
-    &:after
-      border-color: #cccccc
+@import '~@/assets/styles/varibles.styl'
+.border-topbottom
+  &:before
+    border-color: #ffffff
+  &:after
+    border-color: #cccccc
+.border-bottom
+  &:before
+    border-color: #cccccc
+.list
+  position absolute
+  overflow hidden
+  top 1.58rem
+  left 0
+  right 0
+  bottom 0
   .title
     line-height .44rem
     background #eeeeee
@@ -132,5 +92,5 @@ export default {
   .item-list
     .item
       line-height .64rem
-      padding-left .06rem
+      padding-left .2rem
 </style>
