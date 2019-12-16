@@ -1,8 +1,14 @@
 <template>
     <ul class="list">
         <li class="item"
-            v-for="(item,key) of cities"
-            :key="key">{{key}}</li>
+            v-for="item of letters"
+            :key="item"
+            :ref="item"
+            @click="handleletterClick"
+            @touchstart="handleTouchStart"
+            @touchmove="handleTouchMove"
+            @touchend="handleTouchEnd"
+            >{{item}}</li>
     </ul> 
 </template>
 
@@ -11,6 +17,40 @@ export default {
     name:'CityAlphabet',
     props:{
         cities:Object
+    },
+    computed:{
+        letters (){
+            const letters = []
+            for(let i in this.cities) {
+                letters.push(i)
+            }
+            return letters
+        }
+    },
+    data () {
+        return{
+            touchStatus: false
+        }
+    },
+    methods:{
+        handleletterClick (e){
+            this.$emit('change',e.target.innerText)
+        },
+        handleTouchStart (){
+            this.touchStatus = true
+        },
+        handleTouchMove (e){
+            const startY = this.$refs['A'][0].offsetTop
+            const touchY = e.touches[0].clientY - 80
+            const index = Math.floor((touchY - startY)/20)
+            if (index >=0 && index < this.letters.length){
+                this.$emit('change',this.letters[index])
+            }
+            console.log(index)
+        },
+       handleTouchEnd (){
+           this.touchStatus = false
+       } 
     }
 }
 </script>

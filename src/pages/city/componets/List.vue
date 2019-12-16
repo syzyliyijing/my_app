@@ -17,7 +17,7 @@
             <div class="button-list">
                 <div class="button-wrapper"
                      v-for="item of hot"
-                     :key="item.key">
+                     :key="item.id">
                     <div class="button">{{item.name}}</div>
                 </div>               
             </div>
@@ -26,8 +26,9 @@
          <!--链接城市 -->
          <div class="area"
               v-for="(item,key) of cities"
-              :key="key">
-            <div class="title border-topbottom">A</div>
+              :key="key"
+              :ref="key">
+            <div class="title border-topbottom">{{key}}</div>
             <div class="item-list">
                 <div class="item border-bottom"
                      v-for="innerItem of item"
@@ -46,12 +47,21 @@ export default {
     name: 'CityList',
     props:{
         hot: Array,
-        cities: Object
+        cities: Object,
+        letter:String
     },
     mounted (){
         this.scroll=new Bscroll(this.$refs.wrapper)
+    },
+    watch:{
+      letter (){
+        if(this.letter){
+          const element = this.$refs[this.letter][0]
+          this.scroll.scrollToElement(element)
+        }
+      }
     }
-};
+}
 </script>
 
 <style lang="stylus" scoped>
